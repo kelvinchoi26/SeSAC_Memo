@@ -15,6 +15,7 @@
 		1E041CE028BF3F3C008F4BB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E041CDE28BF3F3C008F4BB7 /* LaunchScreen.storyboard */; };
 		1E041D1828BF9CBA008F4BB7 /* MemoUIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */; };
 		1E041D1928BF9CBA008F4BB7 /* MemoUIFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E041D1C28BF9D06008F4BB7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1E041D1B28BF9D06008F4BB7 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		1E041CDF28BF3F3C008F4BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E041CE128BF3F3C008F4BB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MemoUIFramework.xcodeproj; path = ../MemoUIFramework/MemoUIFramework.xcodeproj; sourceTree = "<group>"; };
+		1E041D1B28BF9D06008F4BB7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		1E041CC728BF3F3A008F4BB7 = {
 			isa = PBXGroup;
 			children = (
+				1E041D1B28BF9D06008F4BB7 /* .gitignore */,
 				1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */,
 				1E041CD228BF3F3A008F4BB7 /* SeSAC_Memo */,
 				1E041CD128BF3F3A008F4BB7 /* Products */,
@@ -202,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E041D1C28BF9D06008F4BB7 /* .gitignore in Resources */,
 				1E041CE028BF3F3C008F4BB7 /* LaunchScreen.storyboard in Resources */,
 				1E041CDD28BF3F3C008F4BB7 /* Assets.xcassets in Resources */,
 				1E041CDB28BF3F3A008F4BB7 /* Main.storyboard in Resources */,
