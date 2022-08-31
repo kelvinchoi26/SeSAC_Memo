@@ -13,7 +13,40 @@
 		1E041CDB28BF3F3A008F4BB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E041CD928BF3F3A008F4BB7 /* Main.storyboard */; };
 		1E041CDD28BF3F3C008F4BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E041CDC28BF3F3C008F4BB7 /* Assets.xcassets */; };
 		1E041CE028BF3F3C008F4BB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E041CDE28BF3F3C008F4BB7 /* LaunchScreen.storyboard */; };
+		1E041D1828BF9CBA008F4BB7 /* MemoUIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */; };
+		1E041D1928BF9CBA008F4BB7 /* MemoUIFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E041D1328BF9CAC008F4BB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1E041CF228BF9C09008F4BB7;
+			remoteInfo = MemoUIFramework;
+		};
+		1E041D1528BF9CAC008F4BB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1E041CFC28BF9C09008F4BB7;
+			remoteInfo = MemoUIFrameworkTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1E041D1A28BF9CBA008F4BB7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1E041D1928BF9CBA008F4BB7 /* MemoUIFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E041CD028BF3F3A008F4BB7 /* SeSAC_Memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +57,7 @@
 		1E041CDC28BF3F3C008F4BB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E041CDF28BF3F3C008F4BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E041CE128BF3F3C008F4BB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MemoUIFramework.xcodeproj; path = ../MemoUIFramework/MemoUIFramework.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E041D1828BF9CBA008F4BB7 /* MemoUIFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +75,10 @@
 		1E041CC728BF3F3A008F4BB7 = {
 			isa = PBXGroup;
 			children = (
+				1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */,
 				1E041CD228BF3F3A008F4BB7 /* SeSAC_Memo */,
 				1E041CD128BF3F3A008F4BB7 /* Products */,
+				1E041D1728BF9CBA008F4BB7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +104,22 @@
 			path = SeSAC_Memo;
 			sourceTree = "<group>";
 		};
+		1E041D0F28BF9CAC008F4BB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */,
+				1E041D1628BF9CAC008F4BB7 /* MemoUIFrameworkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E041D1728BF9CBA008F4BB7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +130,7 @@
 				1E041CCC28BF3F3A008F4BB7 /* Sources */,
 				1E041CCD28BF3F3A008F4BB7 /* Frameworks */,
 				1E041CCE28BF3F3A008F4BB7 /* Resources */,
+				1E041D1A28BF9CBA008F4BB7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -113,12 +167,35 @@
 			mainGroup = 1E041CC728BF3F3A008F4BB7;
 			productRefGroup = 1E041CD128BF3F3A008F4BB7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1E041D0F28BF9CAC008F4BB7 /* Products */;
+					ProjectRef = 1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1E041CCF28BF3F3A008F4BB7 /* SeSAC_Memo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MemoUIFramework.framework;
+			remoteRef = 1E041D1328BF9CAC008F4BB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1E041D1628BF9CAC008F4BB7 /* MemoUIFrameworkTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MemoUIFrameworkTests.xctest;
+			remoteRef = 1E041D1528BF9CAC008F4BB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1E041CCE28BF3F3A008F4BB7 /* Resources */ = {
