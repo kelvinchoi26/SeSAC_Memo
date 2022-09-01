@@ -19,6 +19,13 @@
 		1E041D2028BF9F98008F4BB7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D1F28BF9F98008F4BB7 /* BaseViewController.swift */; };
 		1E041D2328BF9FBB008F4BB7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D2228BF9FBB008F4BB7 /* SnapKit */; };
 		1E041D2528BF9FBB008F4BB7 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D2428BF9FBB008F4BB7 /* SnapKit-Dynamic */; };
+		1E041D2828BFCE33008F4BB7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D2728BFCE33008F4BB7 /* BaseTableViewCell.swift */; };
+		1E041D3528C12301008F4BB7 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3428C12301008F4BB7 /* AlertViewController.swift */; };
+		1E041D3928C126A6008F4BB7 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D3828C126A6008F4BB7 /* Then */; };
+		1E041D3C28C12A7D008F4BB7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3B28C12A7D008F4BB7 /* BaseView.swift */; };
+		1E041D3F28C12AEC008F4BB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3E28C12AEC008F4BB7 /* Constants.swift */; };
+		1E041D4128C12B10008F4BB7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4028C12B10008F4BB7 /* Color.swift */; };
+		1E041D4328C12DC1008F4BB7 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4228C12DC1008F4BB7 /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +71,12 @@
 		1E041D0E28BF9CAC008F4BB7 /* MemoUIFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MemoUIFramework.xcodeproj; path = ../MemoUIFramework/MemoUIFramework.xcodeproj; sourceTree = "<group>"; };
 		1E041D1B28BF9D06008F4BB7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1E041D1F28BF9F98008F4BB7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1E041D2728BFCE33008F4BB7 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		1E041D3428C12301008F4BB7 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		1E041D3B28C12A7D008F4BB7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		1E041D3E28C12AEC008F4BB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1E041D4028C12B10008F4BB7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		1E041D4228C12DC1008F4BB7 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +87,7 @@
 				1E041D1828BF9CBA008F4BB7 /* MemoUIFramework.framework in Frameworks */,
 				1E041D2328BF9FBB008F4BB7 /* SnapKit in Frameworks */,
 				1E041D2528BF9FBB008F4BB7 /* SnapKit-Dynamic in Frameworks */,
+				1E041D3928C126A6008F4BB7 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +116,8 @@
 		1E041CD228BF3F3A008F4BB7 /* SeSAC_Memo */ = {
 			isa = PBXGroup;
 			children = (
-				1E041D1E28BF9F45008F4BB7 /* Base */,
+				1E041D3028C122EA008F4BB7 /* Scene */,
+				1E041D1E28BF9F45008F4BB7 /* Utility */,
 				1E041D1D28BF9EE5008F4BB7 /* Application */,
 				1E041CD728BF3F3A008F4BB7 /* ViewController.swift */,
 				1E041CD928BF3F3A008F4BB7 /* Main.storyboard */,
@@ -138,12 +153,49 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		1E041D1E28BF9F45008F4BB7 /* Base */ = {
+		1E041D1E28BF9F45008F4BB7 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1E041D2628BFCE22008F4BB7 /* CustomView */,
+				1E041D3D28C12AD8008F4BB7 /* Constants */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		1E041D2628BFCE22008F4BB7 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				1E041D1F28BF9F98008F4BB7 /* BaseViewController.swift */,
+				1E041D2728BFCE33008F4BB7 /* BaseTableViewCell.swift */,
+				1E041D3B28C12A7D008F4BB7 /* BaseView.swift */,
 			);
-			path = Base;
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		1E041D3028C122EA008F4BB7 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				1E041D3328C122EF008F4BB7 /* Alert */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		1E041D3328C122EF008F4BB7 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				1E041D3428C12301008F4BB7 /* AlertViewController.swift */,
+				1E041D4228C12DC1008F4BB7 /* AlertView.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		1E041D3D28C12AD8008F4BB7 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1E041D3E28C12AEC008F4BB7 /* Constants.swift */,
+				1E041D4028C12B10008F4BB7 /* Color.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +218,7 @@
 			packageProductDependencies = (
 				1E041D2228BF9FBB008F4BB7 /* SnapKit */,
 				1E041D2428BF9FBB008F4BB7 /* SnapKit-Dynamic */,
+				1E041D3828C126A6008F4BB7 /* Then */,
 			);
 			productName = SeSAC_Memo;
 			productReference = 1E041CD028BF3F3A008F4BB7 /* SeSAC_Memo.app */;
@@ -197,6 +250,7 @@
 			mainGroup = 1E041CC728BF3F3A008F4BB7;
 			packageReferences = (
 				1E041D2128BF9FBB008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1E041D3728C126A6008F4BB7 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 1E041CD128BF3F3A008F4BB7 /* Products */;
 			projectDirPath = "";
@@ -250,9 +304,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E041CD828BF3F3A008F4BB7 /* ViewController.swift in Sources */,
+				1E041D3528C12301008F4BB7 /* AlertViewController.swift in Sources */,
 				1E041D2028BF9F98008F4BB7 /* BaseViewController.swift in Sources */,
 				1E041CD428BF3F3A008F4BB7 /* AppDelegate.swift in Sources */,
+				1E041D4328C12DC1008F4BB7 /* AlertView.swift in Sources */,
+				1E041D3C28C12A7D008F4BB7 /* BaseView.swift in Sources */,
+				1E041D2828BFCE33008F4BB7 /* BaseTableViewCell.swift in Sources */,
 				1E041CD628BF3F3A008F4BB7 /* SceneDelegate.swift in Sources */,
+				1E041D3F28C12AEC008F4BB7 /* Constants.swift in Sources */,
+				1E041D4128C12B10008F4BB7 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +540,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		1E041D3728C126A6008F4BB7 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -492,6 +560,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E041D2128BF9FBB008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		1E041D3828C126A6008F4BB7 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E041D3728C126A6008F4BB7 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

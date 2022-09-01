@@ -15,7 +15,6 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
         configure()
         setConstraints()
         configureNavigationController()
@@ -23,7 +22,9 @@ class BaseViewController: UIViewController {
 
     func configureNavigationController() { }
     
-    func configure() { }
+    func configure() {
+        view.backgroundColor = Constants.BaseColor.background
+    }
     
     func setConstraints() { }
     
