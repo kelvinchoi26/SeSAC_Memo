@@ -20,18 +20,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
+        let viewController = MemoSearchViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        
         if userDefaults.bool(forKey: "NotFirst") == false {
             
             userDefaults.set(true, forKey: "NotFirst")
-            
-            let alert = UIAlertController(title: , message: message, preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
-            let ok = UIAlertAction(title: buttonTitle, style: .default, handler: buttonAction)
-            
-            alert.addAction(cancel)
-            alert.addAction(ok)
-            
-            self.present(alert, animated: true)
             
         }
     }

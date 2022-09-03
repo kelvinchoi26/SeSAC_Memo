@@ -8,6 +8,17 @@
 import Foundation
 import Then
 
-class PopUpViewController: BaseViewController {
+class AlertViewController: BaseViewController {
+    
+    let alertView = AlertView()
+    
+    override func loadView() {
+        self.view = alertView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     
 }

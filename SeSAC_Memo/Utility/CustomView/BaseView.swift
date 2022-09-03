@@ -7,16 +7,9 @@
 
 import UIKit
 import SnapKit
+import Then
 
 class BaseView: UIView {
-    
-    let textLabel: UILabel = {
-        let view = UILabel()
-        view.backgroundColor = Constants.BaseColor.view
-        view.text = "처음 오셨군요!\n 환영합니다 :)\n\n 당신만의 메모를 작성하고\n 관리해보세요!"
-        view.textColor = Constants.BaseColor.text
-        view.font = 
-    }()
     
     override init(frame: CGRect) {
         configureUI()
@@ -29,6 +22,8 @@ class BaseView: UIView {
     
     func configureUI() {
         self.backgroundColor = Constants.BaseColor.background
+        self.layer.borderWidth = Constants.Design.borderWidth
+        self.layer.cornerRadius = Constants.Design.cornerRadius
     }
     
     func setConstraints() {}
