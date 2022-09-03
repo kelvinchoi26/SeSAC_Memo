@@ -28,6 +28,10 @@ final class AlertView: BaseView {
             $0.layer.borderWidth = Constants.Design.borderWidth
             $0.layer.cornerRadius = Constants.Design.cornerRadius
         }
+        
+        self.backgroundColor = Constants.BaseColor.background
+        self.layer.borderWidth = Constants.Design.borderWidth
+        self.layer.borderColor = Constants.BaseColor.border
     }
     
     override func setConstraints() {

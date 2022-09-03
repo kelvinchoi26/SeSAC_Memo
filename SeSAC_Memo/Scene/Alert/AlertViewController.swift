@@ -8,7 +8,7 @@
 import Foundation
 import Then
 
-class AlertViewController: BaseViewController {
+final class AlertViewController: BaseViewController {
     
     let alertView = AlertView()
     

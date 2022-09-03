@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
 
     func configureNavigationController() { }
     
-    func configure() {
+    func configureUI() {
         view.backgroundColor = Constants.BaseColor.background
     }
     

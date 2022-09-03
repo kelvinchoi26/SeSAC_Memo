@@ -20,11 +20,7 @@ class BaseView: UIView {
         fatalError()
     }
     
-    func configureUI() {
-        self.backgroundColor = Constants.BaseColor.background
-        self.layer.borderWidth = Constants.Design.borderWidth
-        self.layer.cornerRadius = Constants.Design.cornerRadius
-    }
+    func configureUI() {}
     
     func setConstraints() {}
 }
