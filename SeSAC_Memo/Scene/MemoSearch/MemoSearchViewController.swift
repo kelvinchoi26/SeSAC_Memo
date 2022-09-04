@@ -40,6 +40,8 @@ final class MemoSearchViewController: BaseViewController {
         
         checkInitialRun()
         
+        configureToolbar()
+        
         print("Realm is located at: ", repository.localRealm.configuration.fileURL!)
         
     }
@@ -50,6 +52,8 @@ final class MemoSearchViewController: BaseViewController {
         configureNavigationController()
         
         fetchRealm()
+        
+        configureToolbar()
     }
     
     override func configureUI() {
@@ -60,7 +64,8 @@ final class MemoSearchViewController: BaseViewController {
         [tableView].forEach {
             view.addSubview($0)
         }
-
+        
+        configureToolbar()
     }
     
     override func setConstraints() {
@@ -69,7 +74,7 @@ final class MemoSearchViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.equalTo(8)
-            $0.trailing.equalTo(8)
+            $0.trailing.equalTo(-8)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -112,6 +117,28 @@ extension MemoSearchViewController {
         tasks = repository.fetch()
     }
     
+    func configureToolbar() {
+        
+        self.navigationController?.isToolbarHidden = false
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+    
+        let writeButton = UIBarButtonItem(image: UIImage(systemName: "sqaure.and.pencil"), style: .plain, target: self, action: #selector(writeButtonClicked))
+        writeButton.tintColor = Constants.BaseColor.button
+        
+        var items = [UIBarButtonItem]()
+        
+        [flexibleSpace, writeButton].forEach {
+            items.append($0)
+        }
+        
+        self.navigationController?.toolbarItems = items
+        
+    }
+    
+    @objc func writeButtonClicked() {
+        
+    }
 }
 
 extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -169,8 +196,8 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
             let newTasks = repository.fetchFilter()
             cell.setData(data: (newTasks[indexPath.row]))
         case 1:
-            let newTasks = repository.fetchDeFilter()
-            cell.setData(data: (newTasks[indexPath.row]))
+//            let newTasks = repository.fetchDeFilter()
+            cell.setData(data: (tasks?[indexPath.row])!)
         default:
             break
         }

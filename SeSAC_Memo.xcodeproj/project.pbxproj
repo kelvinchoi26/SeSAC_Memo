@@ -33,6 +33,7 @@
 		1E041D5E28C3D2FE008F4BB7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D5D28C3D2FE008F4BB7 /* RealmSwift */; };
 		1E041D6028C3DF02008F4BB7 /* UserMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D5F28C3DF02008F4BB7 /* UserMemoRepository.swift */; };
 		1E041D6828C4EB57008F4BB7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D6728C4EB57008F4BB7 /* SnapKit */; };
+		1E041D6E28C54650008F4BB7 /* MemoWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D6D28C54650008F4BB7 /* MemoWriteController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		1E041D5528C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSearchTableViewCell.swift; sourceTree = "<group>"; };
 		1E041D5828C3D2AB008F4BB7 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		1E041D5F28C3DF02008F4BB7 /* UserMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoRepository.swift; sourceTree = "<group>"; };
+		1E041D6D28C54650008F4BB7 /* MemoWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoWriteController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 		1E041D3028C122EA008F4BB7 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				1E041D6C28C54632008F4BB7 /* MemoWrite */,
 				1E041D4D28C3B621008F4BB7 /* MemoSearch */,
 				1E041D3328C122EF008F4BB7 /* Alert */,
 			);
@@ -248,6 +251,14 @@
 				1E041D5F28C3DF02008F4BB7 /* UserMemoRepository.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		1E041D6C28C54632008F4BB7 /* MemoWrite */ = {
+			isa = PBXGroup;
+			children = (
+				1E041D6D28C54650008F4BB7 /* MemoWriteController.swift */,
+			);
+			path = MemoWrite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +374,7 @@
 				1E041D2028BF9F98008F4BB7 /* BaseViewController.swift in Sources */,
 				1E041CD428BF3F3A008F4BB7 /* AppDelegate.swift in Sources */,
 				1E041D4328C12DC1008F4BB7 /* AlertView.swift in Sources */,
+				1E041D6E28C54650008F4BB7 /* MemoWriteController.swift in Sources */,
 				1E041D5628C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift in Sources */,
 				1E041D3C28C12A7D008F4BB7 /* BaseView.swift in Sources */,
 				1E041D2828BFCE33008F4BB7 /* BaseTableViewCell.swift in Sources */,

@@ -18,6 +18,7 @@ class MemoSearchTableViewCell: BaseTableViewCell {
     
     override func configureUI() {
         self.backgroundColor = Constants.BaseColor.gray
+        self.layer.cornerRadius = 8
         
         titleLabel.do {
             $0.textColor = Constants.BaseColor.text
@@ -79,7 +80,7 @@ class MemoSearchTableViewCell: BaseTableViewCell {
     }
     
     override func setConstraints() {
-        let spacing = 8
+        let spacing = 10
         
         stackView.snp.makeConstraints {
             $0.height.equalTo(contentView).inset(spacing)
