@@ -37,4 +37,17 @@ class UserMemoRepository: UserMemoRepositoryType {
         }
     }
     
+    func countOfPinnedMemo() -> Int {
+        let data = localRealm.objects(UserMemo.self).filter("pinned == true")
+        return data.count
+    }
+    
+    func fetchFilter() -> Results<UserMemo> {
+        return localRealm.objects(UserMemo.self).filter("pinned == true")
+    }
+    
+    func fetchDeFilter() -> Results<UserMemo> {
+        return localRealm.objects(UserMemo.self).filter("pinned == false")
+    }
+    
 }

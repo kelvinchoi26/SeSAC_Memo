@@ -10,35 +10,93 @@ import SnapKit
 import UIKit
 import Then
 import RealmSwift
+import MemoUIFramework
 
 final class MemoSearchViewController: BaseViewController {
     
-    var searchBar = UISearchBar()
+    let repository = UserMemoRepository()
     
     var tasks: Results<UserMemo>! {
         didSet {
             tableView.reloadData()
-            print("Tasks Changed")
         }
     }
     
     lazy var tableView: UITableView = {
         let view = UITableView()
-        view.rowHeight = 100
+        view.rowHeight = 50
         view.delegate = self
         view.dataSource = self
         view.register(MemoSearchTableViewCell.self, forCellReuseIdentifier: "cell")
         return view
     }()
-
-    
-    let repository = UserMemoRepository()
     
     override func viewDidLoad() {
         
-        // Realm 데이터를 정렬해 tasks에 담기
-        tasks = repository.localRealm.objects(UserMemo.self).sorted(byKeyPath: "writtenDate", ascending: true)
+        super.viewDidLoad()
         
+        // Realm 데이터를 정렬해 tasks에 담기
+        tasks = repository.fetch()
+        
+        checkInitialRun()
+        
+        print("Realm is located at: ", repository.localRealm.configuration.fileURL!)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavigationController()
+        
+        fetchRealm()
+    }
+    
+    override func configureUI() {
+        super.configureUI()
+        
+        view.backgroundColor = Constants.BaseColor.background
+        
+        [tableView].forEach {
+            view.addSubview($0)
+        }
+
+    }
+    
+    override func setConstraints() {
+        super.setConstraints()
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(8)
+            $0.trailing.equalTo(8)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    override func configureNavigationController() {
+        super.configureNavigationController()
+        
+        // 3자리 마다 콤마 찍기
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        let taskCount = tasks.count
+        let count = formatter.string(from: taskCount as NSNumber)
+
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "검색"
+        self.navigationItem.searchController = searchController
+        self.navigationItem.title = "\(count ?? "0")개의 메모"
+        self.navigationItem.titleView?.tintColor = Constants.BaseColor.text
+        self.navigationItem.titleView?.backgroundColor = Constants.BaseColor.navigationBar
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+}
+
+extension MemoSearchViewController {
+    // 첫 실행인지 확인 후 Alert 띄우기
+    func checkInitialRun() {
         if userDefaults.bool(forKey: "NotFirst") == false {
             
             userDefaults.set(true, forKey: "NotFirst")
@@ -50,29 +108,73 @@ final class MemoSearchViewController: BaseViewController {
         }
     }
     
-    override func configureUI() {
-        searchBar.do {
-            $0.placeholder = "검색"
-            $0.searchTextField.font = .systemFont(ofSize: 14)
-            $0.searchTextField.backgroundColor = .clear
-        }
-        
-        view.addSubview(tableView)
-        view.addSubview(searchBar)
+    func fetchRealm() {
+        tasks = repository.fetch()
     }
     
 }
 
 extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        var count = 0
+        
+        switch section {
+        case 0:
+            count = repository.countOfPinnedMemo()
+        case 1:
+            count = tasks.count
+        default:
+            break
+        }
+        
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        view.backgroundColor = .black
+        
+        let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.frame.width, height: 50))
+                            
+        switch section {
+        case 0:
+            label.text = "고정된 메모"
+        case 1:
+            label.text = "메모"
+        default:
+            break
+        }
+        
+        label.textColor = Constants.BaseColor.text
+        label.font = .boldSystemFont(ofSize: 24)
+               
+        view.addSubview(label)
+        return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MemoSearchTableViewCell else { return UITableViewCell() }
         
-        cell.setData(data: tasks[indexPath.row])
+        switch indexPath.section {
+        case 0:
+            let newTasks = repository.fetchFilter()
+            cell.setData(data: (newTasks[indexPath.row]))
+        case 1:
+            let newTasks = repository.fetchDeFilter()
+            cell.setData(data: (newTasks[indexPath.row]))
+        default:
+            break
+        }
+    
         return cell
     }
     

@@ -17,8 +17,6 @@
 		1E041D1928BF9CBA008F4BB7 /* MemoUIFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E041D1428BF9CAC008F4BB7 /* MemoUIFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E041D1C28BF9D06008F4BB7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1E041D1B28BF9D06008F4BB7 /* .gitignore */; };
 		1E041D2028BF9F98008F4BB7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D1F28BF9F98008F4BB7 /* BaseViewController.swift */; };
-		1E041D2328BF9FBB008F4BB7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D2228BF9FBB008F4BB7 /* SnapKit */; };
-		1E041D2528BF9FBB008F4BB7 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D2428BF9FBB008F4BB7 /* SnapKit-Dynamic */; };
 		1E041D2828BFCE33008F4BB7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D2728BFCE33008F4BB7 /* BaseTableViewCell.swift */; };
 		1E041D3528C12301008F4BB7 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3428C12301008F4BB7 /* AlertViewController.swift */; };
 		1E041D3928C126A6008F4BB7 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D3828C126A6008F4BB7 /* Then */; };
@@ -29,12 +27,12 @@
 		1E041D4528C18691008F4BB7 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4428C18691008F4BB7 /* Text.swift */; };
 		1E041D4728C187EF008F4BB7 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4628C187EF008F4BB7 /* Font.swift */; };
 		1E041D4F28C3B62F008F4BB7 /* MemoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4E28C3B62F008F4BB7 /* MemoSearchViewController.swift */; };
-		1E041D5228C3C75C008F4BB7 /* MemoSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D5128C3C75C008F4BB7 /* MemoSearchView.swift */; };
 		1E041D5628C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D5528C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift */; };
 		1E041D5928C3D2AB008F4BB7 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D5828C3D2AB008F4BB7 /* RealmModel.swift */; };
 		1E041D5C28C3D2FE008F4BB7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D5B28C3D2FE008F4BB7 /* Realm */; };
 		1E041D5E28C3D2FE008F4BB7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D5D28C3D2FE008F4BB7 /* RealmSwift */; };
 		1E041D6028C3DF02008F4BB7 /* UserMemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D5F28C3DF02008F4BB7 /* UserMemoRepository.swift */; };
+		1E041D6828C4EB57008F4BB7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D6728C4EB57008F4BB7 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +87,6 @@
 		1E041D4428C18691008F4BB7 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		1E041D4628C187EF008F4BB7 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		1E041D4E28C3B62F008F4BB7 /* MemoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSearchViewController.swift; sourceTree = "<group>"; };
-		1E041D5128C3C75C008F4BB7 /* MemoSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSearchView.swift; sourceTree = "<group>"; };
 		1E041D5528C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSearchTableViewCell.swift; sourceTree = "<group>"; };
 		1E041D5828C3D2AB008F4BB7 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		1E041D5F28C3DF02008F4BB7 /* UserMemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoRepository.swift; sourceTree = "<group>"; };
@@ -102,10 +99,9 @@
 			files = (
 				1E041D5E28C3D2FE008F4BB7 /* RealmSwift in Frameworks */,
 				1E041D1828BF9CBA008F4BB7 /* MemoUIFramework.framework in Frameworks */,
-				1E041D2328BF9FBB008F4BB7 /* SnapKit in Frameworks */,
-				1E041D2528BF9FBB008F4BB7 /* SnapKit-Dynamic in Frameworks */,
 				1E041D3928C126A6008F4BB7 /* Then in Frameworks */,
 				1E041D5C28C3D2FE008F4BB7 /* Realm in Frameworks */,
+				1E041D6828C4EB57008F4BB7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +236,6 @@
 		1E041D5428C3CE3A008F4BB7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E041D5128C3C75C008F4BB7 /* MemoSearchView.swift */,
 				1E041D5528C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift */,
 			);
 			path = View;
@@ -273,11 +268,10 @@
 			);
 			name = SeSAC_Memo;
 			packageProductDependencies = (
-				1E041D2228BF9FBB008F4BB7 /* SnapKit */,
-				1E041D2428BF9FBB008F4BB7 /* SnapKit-Dynamic */,
 				1E041D3828C126A6008F4BB7 /* Then */,
 				1E041D5B28C3D2FE008F4BB7 /* Realm */,
 				1E041D5D28C3D2FE008F4BB7 /* RealmSwift */,
+				1E041D6728C4EB57008F4BB7 /* SnapKit */,
 			);
 			productName = SeSAC_Memo;
 			productReference = 1E041CD028BF3F3A008F4BB7 /* SeSAC_Memo.app */;
@@ -308,9 +302,9 @@
 			);
 			mainGroup = 1E041CC728BF3F3A008F4BB7;
 			packageReferences = (
-				1E041D2128BF9FBB008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1E041D3728C126A6008F4BB7 /* XCRemoteSwiftPackageReference "Then" */,
 				1E041D5A28C3D2FE008F4BB7 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				1E041D6628C4EB57008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 1E041CD128BF3F3A008F4BB7 /* Products */;
 			projectDirPath = "";
@@ -372,7 +366,6 @@
 				1E041D5628C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift in Sources */,
 				1E041D3C28C12A7D008F4BB7 /* BaseView.swift in Sources */,
 				1E041D2828BFCE33008F4BB7 /* BaseTableViewCell.swift in Sources */,
-				1E041D5228C3C75C008F4BB7 /* MemoSearchView.swift in Sources */,
 				1E041D6028C3DF02008F4BB7 /* UserMemoRepository.swift in Sources */,
 				1E041D4728C187EF008F4BB7 /* Font.swift in Sources */,
 				1E041CD628BF3F3A008F4BB7 /* SceneDelegate.swift in Sources */,
@@ -599,14 +592,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1E041D2128BF9FBB008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		1E041D3728C126A6008F4BB7 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
@@ -623,19 +608,17 @@
 				kind = branch;
 			};
 		};
+		1E041D6628C4EB57008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1E041D2228BF9FBB008F4BB7 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E041D2128BF9FBB008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		1E041D2428BF9FBB008F4BB7 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E041D2128BF9FBB008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
 		1E041D3828C126A6008F4BB7 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1E041D3728C126A6008F4BB7 /* XCRemoteSwiftPackageReference "Then" */;
@@ -650,6 +633,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E041D5A28C3D2FE008F4BB7 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		1E041D6728C4EB57008F4BB7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E041D6628C4EB57008F4BB7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

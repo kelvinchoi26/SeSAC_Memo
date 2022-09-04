@@ -17,16 +17,20 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configure()
+        configureUI()
         setConstraints()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         configureNavigationController()
     }
 
     func configureNavigationController() { }
     
-    func configureUI() {
-        view.backgroundColor = Constants.BaseColor.background
-    }
+    func configureUI() {}
     
     func setConstraints() { }
     

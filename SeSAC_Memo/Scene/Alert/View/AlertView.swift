@@ -14,8 +14,9 @@ final class AlertView: BaseView {
     let okButton = UIButton()
 
     override func configureUI() {
+        super.configureUI()
+        
         textLabel.do {
-            $0.backgroundColor = Constants.BaseColor.view
             $0.text = Constants.Text.alertText
             $0.textColor = Constants.BaseColor.text
             $0.font = .systemFont(ofSize: Constants.FontSize.alertFont)
@@ -29,12 +30,14 @@ final class AlertView: BaseView {
             $0.layer.cornerRadius = Constants.Design.cornerRadius
         }
         
-        self.backgroundColor = Constants.BaseColor.background
+        self.backgroundColor = Constants.BaseColor.memoText
         self.layer.borderWidth = Constants.Design.borderWidth
         self.layer.borderColor = Constants.BaseColor.border
     }
     
     override func setConstraints() {
+        super.setConstraints()
+        
         textLabel.snp.makeConstraints {
             $0.topMargin.equalTo(20)
             $0.leadingMargin.equalTo(20)

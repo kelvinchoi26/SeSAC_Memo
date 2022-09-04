@@ -11,6 +11,7 @@ import UIKit
 extension Constants {
     
     enum BaseColor {
+        static let navigationBar = UIColor.darkGray
         static let background = UIColor.black
         static let text = UIColor.white
         static let memoText = UIColor.lightGray
@@ -19,6 +20,7 @@ extension Constants {
         static let view = UIColor.darkGray
         static let button = UIColor(named: "buttonColor")
         static let border = UIColor.white.cgColor
+        static let gray = UIColor(named: "defaultGray")
     }
     
 }

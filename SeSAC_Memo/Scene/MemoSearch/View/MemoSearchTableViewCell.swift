@@ -12,27 +12,36 @@ import UIKit
 class MemoSearchTableViewCell: BaseTableViewCell {
     
     let titleLabel = UILabel()
-    let dateLabel = UILabel()
     let contentLabel = UILabel()
     
+    let stackView = UIStackView()
+    
     override func configureUI() {
+        self.backgroundColor = Constants.BaseColor.gray
+        
         titleLabel.do {
             $0.textColor = Constants.BaseColor.text
-            $0.font = .boldSystemFont(ofSize: 13)
-        }
-        
-        dateLabel.do {
-            $0.textColor = Constants.BaseColor.memoText
-            $0.font = .boldSystemFont(ofSize: 12)
+            $0.font = .boldSystemFont(ofSize: 16)
         }
         
         contentLabel.do {
             $0.textColor = Constants.BaseColor.memoText
-            $0.font = .boldSystemFont(ofSize: 12)
+            $0.font = .systemFont(ofSize: 14)
+        }
+        
+        stackView.do {
+            $0.axis = .vertical
+            $0.alignment = .top
+            $0.distribution = .fillEqually
+            $0.spacing = 4
+        }
+        
+        contentView.addSubview(stackView)
+        
+        [titleLabel, contentLabel].forEach {
+            stackView.addArrangedSubview($0)
         }
     }
-    
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,39 +53,40 @@ class MemoSearchTableViewCell: BaseTableViewCell {
     
     func setData(data: UserMemo) {
         titleLabel.text = data.diaryTitle
-        dateLabel.text = data.writtenDate.formatted()
-        contentLabel.text = data.diaryContent
-    }
-    
-    override func configure() {
-        backgroundColor = Constants.BaseColor.background
-        [diaryImageView, stackView].forEach {
-            contentView.addSubview($0)
-        }
         
-        [titleLabel, dateLabel, contentLabel].forEach {
-            stackView.addArrangedSubview($0)
+        let dayDiff = numberOfDaysBetween(data.writtenDate)
+        
+        let formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier:"ko_KR")
+            return formatter
+        }()
+        
+        switch dayDiff {
+        case 0:
+            formatter.dateFormat = "a hh:mm"
+            let dateString = formatter.string(from: data.writtenDate)
+            contentLabel.text = "\(dateString)  \(data.diaryContent ?? "추가 텍스트 없음")"
+        case 1...6:
+            formatter.dateFormat = "E요일"
+            let dateString = formatter.string(from: data.writtenDate)
+            contentLabel.text = "\(dateString)  \(data.diaryContent ?? "추가 텍스트 없음")"
+        default:
+            formatter.dateFormat = "yyyy. MM. dd a hh:mm"
+            let dateString = formatter.string(from: data.writtenDate)
+            contentLabel.text = "\(dateString)  \(data.diaryContent ?? "추가 텍스트 없음")"
         }
     }
     
     override func setConstraints() {
         let spacing = 8
         
-        diaryImageView.snp.makeConstraints { make in
-            make.height.equalTo(contentView).inset(spacing)
-            make.width.equalTo(diaryImageView.snp.height)
-            make.centerY.equalTo(contentView)
-            make.trailingMargin.equalTo(-spacing)
-        }
-        
-        stackView.snp.makeConstraints { make in
-            make.leadingMargin.top.equalTo(spacing)
-            make.bottom.equalTo(-spacing)
-            make.trailing.equalTo(diaryImageView.snp.leading).offset(-spacing)
+        stackView.snp.makeConstraints {
+            $0.height.equalTo(contentView).inset(spacing)
+            $0.leadingMargin.top.equalTo(spacing)
+            $0.bottom.equalTo(-spacing)
+            $0.trailingMargin.equalTo(-spacing)
         }
     }
-    
-
-    
     
 }
