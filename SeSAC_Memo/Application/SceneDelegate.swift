@@ -26,11 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        if userDefaults.bool(forKey: "NotFirst") == false {
-            
-            userDefaults.set(true, forKey: "NotFirst")
-            
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

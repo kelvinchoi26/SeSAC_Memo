@@ -10,6 +10,12 @@ import Foundation
 extension Constants {
 
     enum Text {
-        static let alertText = "처음 오셨군요!\n 환영합니다 :)\n\n 당신만의 메모를 작성하고\n 관리해보세요!"
+        static let alertText = """
+                      처음 오셨군요!
+                      환영합니다 :)
+                      
+                      당신만의 메모를 작성하고
+                      관리해보세요!
+                      """
     }
 }

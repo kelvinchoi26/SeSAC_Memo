@@ -43,11 +43,14 @@ class UserMemoRepository: UserMemoRepositoryType {
     }
     
     func fetchFilter() -> Results<UserMemo> {
-        return localRealm.objects(UserMemo.self).filter("pinned == true")
+        return localRealm.objects(UserMemo.self).filter("pinned == true").sorted(byKeyPath: "writtenDate", ascending: true)
     }
     
     func fetchDeFilter() -> Results<UserMemo> {
-        return localRealm.objects(UserMemo.self).filter("pinned == false")
+        return localRealm.objects(UserMemo.self).filter("pinned == false").sorted(byKeyPath: "writtenDate", ascending: true)
     }
     
+    func fetchSearched(text: String) -> Results<UserMemo> {
+        return localRealm.objects(UserMemo.self).filter("diaryTitle CONTAINS '\(text)' or diaryContent CONTAINS '\(text)'").sorted(byKeyPath: "writtenDate", ascending: true)
+    }
 }

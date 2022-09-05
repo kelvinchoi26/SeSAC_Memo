@@ -16,10 +16,38 @@ final class MemoSearchViewController: BaseViewController {
     
     let repository = UserMemoRepository()
     
-    var tasks: Results<UserMemo>! {
+    var tasks: Results<UserMemo>? {
         didSet {
+            pinnedMemo = repository.fetchFilter()
+            unPinnedMemo = repository.fetchDeFilter()
+            numOfPinnedMemo = pinnedMemo?.count ?? 0
+            
+            // 제목 개수 업데이트
+            configureNavigationController()
+            
             tableView.reloadData()
         }
+    }
+    
+    var pinnedMemo: Results<UserMemo>?
+    
+    var unPinnedMemo: Results<UserMemo>?
+    
+    // 검색된 메모들
+    var searchedMemo: Results<UserMemo>?
+    
+    // 고정된 메모가 5개인 경우 토스트를 사용해서 불가능하다고 알림
+    var numOfPinnedMemo: Int = 0
+    
+    var isSearching: Bool {
+        let searchController = self.navigationItem.searchController
+        let isActive = searchController?.isActive ?? false
+        var searchBarContainsText = searchController?.searchBar.text?.isEmpty
+        
+        // isEmpty가 아닌 경우로 바꿔줌
+        searchBarContainsText?.toggle()
+        
+        return isActive && searchBarContainsText!
     }
     
     lazy var tableView: UITableView = {
@@ -38,7 +66,7 @@ final class MemoSearchViewController: BaseViewController {
         // Realm 데이터를 정렬해 tasks에 담기
         tasks = repository.fetch()
         
-        checkInitialRun()
+//        checkInitialRun()
         
         configureToolbar()
         
@@ -85,7 +113,7 @@ final class MemoSearchViewController: BaseViewController {
         // 3자리 마다 콤마 찍기
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        let taskCount = tasks.count
+        let taskCount = tasks?.count ?? 0
         let count = formatter.string(from: taskCount as NSNumber)
 
         let searchController = UISearchController(searchResultsController: nil)
@@ -154,7 +182,7 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             count = repository.countOfPinnedMemo()
         case 1:
-            count = tasks.count
+            count = tasks?.count ?? 0
         default:
             break
         }
@@ -235,5 +263,13 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = Constants.BaseColor.trash
         
         return UISwipeActionsConfiguration(actions: [delete])
+    }
+}
+
+extension MemoSearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {return}
+        self.searchedMemo = repository.fetchSearched(text: text)
+        self.tableView.reloadData()
     }
 }
