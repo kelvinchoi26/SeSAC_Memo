@@ -58,7 +58,10 @@ final class MemoWriteController: BaseViewController {
     }
     
     @objc func shareButtonClicked() {
-        
+        let shareContent = memoTextView.text ?? ""
+                
+        let vc = UIActivityViewController(activityItems: [shareContent], applicationActivities: [])
+        self.present(vc, animated: true, completion: nil)
     }
     
     @objc func doneButtonClicked() {
