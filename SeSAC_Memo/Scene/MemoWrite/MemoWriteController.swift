@@ -29,7 +29,7 @@ final class MemoWriteController: BaseViewController {
             $0.backgroundColor = Constants.BaseColor.background
             $0.textColor = Constants.BaseColor.text
             $0.textAlignment = .left
-            $0.font = .boldSystemFont(ofSize: 14)
+            $0.font = .boldSystemFont(ofSize: 16)
         }
         
         view.addSubview(textView)
@@ -41,18 +41,19 @@ final class MemoWriteController: BaseViewController {
         super.setConstraints()
         
         textView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.topMargin.leadingMargin.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.bottomMargin.trailingMargin.equalTo(view.safeAreaLayoutGuide).offset(-10)
         }
     }
     
     override func configureNavigationController() {
         super.configureNavigationController()
         
-        let shareButton = UIBarButtonItem(image: UIImage(systemName: "sqaure.and.arrow.up"), style: .plain, target: self, action: #selector(shareButtonClicked))
+        let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareButtonClicked))
         let doneButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(doneButtonClicked))
         self.navigationController?.navigationBar.tintColor = Constants.BaseColor.button
         
-        let items = [shareButton, doneButton]
+        let items = [doneButton, shareButton]
         self.navigationItem.rightBarButtonItems = items
     }
     

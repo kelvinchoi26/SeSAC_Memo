@@ -53,7 +53,7 @@ class MemoSearchTableViewCell: BaseTableViewCell {
     }
     
     func setData(data: UserMemo) {
-        titleLabel.text = data.diaryTitle
+        titleLabel.text = data.memoTitle
         
         let dayDiff = numberOfDaysBetween(data.writtenDate)
         
@@ -67,15 +67,40 @@ class MemoSearchTableViewCell: BaseTableViewCell {
         case 0:
             formatter.dateFormat = "a hh:mm"
             let dateString = formatter.string(from: data.writtenDate)
-            contentLabel.text = "\(dateString)  \(data.diaryContent ?? "추가 텍스트 없음")"
+            contentLabel.text = "\(dateString)  \(data.memoContent ?? "추가 텍스트 없음")"
         case 1...6:
             formatter.dateFormat = "E요일"
             let dateString = formatter.string(from: data.writtenDate)
-            contentLabel.text = "\(dateString)  \(data.diaryContent ?? "추가 텍스트 없음")"
+            contentLabel.text = "\(dateString)  \(data.memoContent ?? "추가 텍스트 없음")"
         default:
             formatter.dateFormat = "yyyy. MM. dd a hh:mm"
             let dateString = formatter.string(from: data.writtenDate)
-            contentLabel.text = "\(dateString)  \(data.diaryContent ?? "추가 텍스트 없음")"
+            contentLabel.text = "\(dateString)  \(data.memoContent ?? "추가 텍스트 없음")"
+        }
+    }
+    
+    func returnDateLabel(date: Date) -> String {
+        let dayDiff = numberOfDaysBetween(date)
+        
+        let formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier:"ko_KR")
+            return formatter
+        }()
+        
+        switch dayDiff {
+        case 0:
+            formatter.dateFormat = "a hh:mm"
+            let dateString = formatter.string(from: date)
+            return dateString
+        case 1...6:
+            formatter.dateFormat = "E요일"
+            let dateString = formatter.string(from: date)
+            return dateString
+        default:
+            formatter.dateFormat = "yyyy. MM. dd a hh:mm"
+            let dateString = formatter.string(from: date)
+            return dateString
         }
     }
     

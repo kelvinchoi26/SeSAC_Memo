@@ -18,14 +18,15 @@ final class MemoSearchViewController: BaseViewController {
     
     var tasks: Results<UserMemo>? {
         didSet {
+            tableView.reloadData()
+            // 핵심 ***
+            // 계속해서 값 갱신 필수!
             pinnedMemo = repository.fetchFilter()
             unPinnedMemo = repository.fetchDeFilter()
             numOfPinnedMemo = pinnedMemo?.count ?? 0
             
             // 제목 개수 업데이트
             configureNavigationController()
-            
-            tableView.reloadData()
         }
     }
     
@@ -68,8 +69,6 @@ final class MemoSearchViewController: BaseViewController {
         
 //        checkInitialRun()
         
-        configureToolbar()
-        
         print("Realm is located at: ", repository.localRealm.configuration.fileURL!)
         
     }
@@ -80,8 +79,8 @@ final class MemoSearchViewController: BaseViewController {
         configureNavigationController()
         
         fetchRealm()
+        tableView.reloadData()
         
-        configureToolbar()
     }
     
     override func configureUI() {
@@ -151,8 +150,11 @@ extension MemoSearchViewController {
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
     
-        let writeButton = UIBarButtonItem(image: UIImage(systemName: "sqaure.and.pencil"), style: .plain, target: self, action: #selector(writeButtonClicked))
+        let writeButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(writeButtonClicked))
         writeButton.tintColor = Constants.BaseColor.button
+        writeButton.customView?.backgroundColor = Constants.BaseColor.button
+        
+        self.navigationController?.toolbar.barTintColor = .red
         
         var items = [UIBarButtonItem]()
         
@@ -160,34 +162,39 @@ extension MemoSearchViewController {
             items.append($0)
         }
         
-        self.navigationController?.toolbarItems = items
+        self.toolbarItems = items
         
     }
     
     @objc func writeButtonClicked() {
-        
+        let vc = MemoWriteController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return self.isSearching ? 1 : numOfPinnedMemo > 0 ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
         
-        switch section {
-        case 0:
-            count = repository.countOfPinnedMemo()
-        case 1:
-            count = tasks?.count ?? 0
-        default:
-            break
+        let count = tasks?.count
+        
+        // 검색하고 있는 경우
+        if self.isSearching {
+            return searchedMemo?.count ?? 0
+        } else {
+            // 하나의 섹션만 표시되는 경우
+            if numOfPinnedMemo == 0 || count == numOfPinnedMemo {
+                return count ?? 0
+            } else {
+                // 두 개 모두 표시되는 경우
+                return section == 1 ? count! - numOfPinnedMemo : numOfPinnedMemo
+            }
         }
-        
-        return count
+    
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -197,21 +204,24 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
         view.backgroundColor = .black
-        
+
         let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.frame.width, height: 50))
-                            
-        switch section {
-        case 0:
-            label.text = "고정된 메모"
-        case 1:
-            label.text = "메모"
-        default:
-            break
+
+        if self.isSearching {
+            label.text = "\(self.searchedMemo?.count ?? 0)개 찾음"
+        } else {
+            if numOfPinnedMemo == 0 && tasks!.count == 0 {
+                return nil
+            } else if numOfPinnedMemo == tasks!.count {
+                label.text = "고정된 메모"
+            } else {
+                label.text = section == 0 ? "고정된 메모" : "메모"
+            }
         }
-        
+
         label.textColor = Constants.BaseColor.text
         label.font = .boldSystemFont(ofSize: 24)
-               
+
         view.addSubview(label)
         return view
     }
@@ -219,17 +229,47 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? MemoSearchTableViewCell else { return UITableViewCell() }
         
-        switch indexPath.section {
-        case 0:
-            let newTasks = repository.fetchFilter()
-            cell.setData(data: (newTasks[indexPath.row]))
-        case 1:
-//            let newTasks = repository.fetchDeFilter()
-            cell.setData(data: (tasks?[indexPath.row])!)
-        default:
-            break
+        // 검색 중 일 때 tableView update
+        if self.isSearching {
+            let memo = searchedMemo?[indexPath.row]
+            let title = memo!.memoTitle
+            
+            let dateLabel = cell.returnDateLabel(date: memo!.writtenDate)
+            // 날짜 String까지도 검색어에 포함되는 문제 발생....!!!
+            let content = "\(dateLabel)  \(String(describing: memo!.memoContent))"
+            
+            let searchedText = self.navigationItem.searchController?.searchBar.text ?? ""
+            
+            let highlightedColor = Constants.BaseColor.button
+            
+            let attributedTitleString = NSMutableAttributedString(string: title)
+            let attributedContentString = NSMutableAttributedString(string: content)
+            
+            attributedTitleString.addAttribute(.foregroundColor, value: highlightedColor!, range: (title as NSString).range(of: searchedText))
+            attributedContentString.addAttribute(.foregroundColor, value: highlightedColor!, range: (content as NSString).range(of: searchedText))
+            
+            cell.titleLabel.attributedText = attributedTitleString
+            cell.contentLabel.attributedText = attributedContentString
+            
+            // 검색하지 않을 때 tableView update
+        } else {
+            var memo = UserMemo()
+            
+            // 고정 메모가 없는 경우
+            if numOfPinnedMemo == 0 {
+                memo = tasks![indexPath.row]
+            } else {
+                if indexPath.section == 1 {
+                    memo = unPinnedMemo![indexPath.row]
+                } else {
+                    memo = pinnedMemo![indexPath.row]
+                }
+            }
+            
+            cell.setData(data: memo)
+            
         }
-    
+        
         return cell
     }
     
@@ -238,24 +278,30 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         let pinned = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
             // realm data update
-            self.repository.updatePinned(item: self.tasks[indexPath.row])
+            self.repository.updatePinned(item: self.tasks![indexPath.row])
+            self.tasks = self.repository.fetch()
             
         }
         
         // realm 데이터 기준
-        let image = tasks[indexPath.row].pinned ? "pin.fill" : "pin.slash.fill"
+        let image = tasks![indexPath.row].pinned ? "pin.fill" : "pin.slash.fill"
         pinned.image = UIImage(systemName: image)
         pinned.backgroundColor = Constants.BaseColor.button
+        
         
         return UISwipeActionsConfiguration(actions: [pinned])
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+//        let memo = self.tasks[indexPath.row]
+//        ]
         let delete = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
             // 사진 먼저 지우고 램 지우면 문제가 안생겼던 이유
             
-            self.repository.deleteItem(item: self.tasks[indexPath.row])
+            self.repository.deleteItem(item: self.tasks![indexPath.row])
+            self.tasks = self.repository.fetch()
         }
 
         // realm 데이터 기준
