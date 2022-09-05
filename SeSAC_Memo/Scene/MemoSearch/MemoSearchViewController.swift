@@ -18,12 +18,14 @@ final class MemoSearchViewController: BaseViewController {
     
     var tasks: Results<UserMemo>? {
         didSet {
-            tableView.reloadData()
+            print("current tasks: \(tasks)")
             // 핵심 ***
             // 계속해서 값 갱신 필수!
             pinnedMemo = repository.fetchFilter()
             unPinnedMemo = repository.fetchDeFilter()
             numOfPinnedMemo = pinnedMemo?.count ?? 0
+            
+            tableView.reloadData()
             
             // 제목 개수 업데이트
             configureNavigationController()
@@ -40,6 +42,7 @@ final class MemoSearchViewController: BaseViewController {
     // 고정된 메모가 5개인 경우 토스트를 사용해서 불가능하다고 알림
     var numOfPinnedMemo: Int = 0
     
+    // searchBar에 입력중인지 여
     var isSearching: Bool {
         let searchController = self.navigationItem.searchController
         let isActive = searchController?.isActive ?? false
@@ -94,6 +97,7 @@ final class MemoSearchViewController: BaseViewController {
         }
         
         configureToolbar()
+
     }
     
     override func setConstraints() {
@@ -126,6 +130,9 @@ final class MemoSearchViewController: BaseViewController {
         self.navigationItem.titleView?.tintColor = Constants.BaseColor.text
         self.navigationItem.titleView?.backgroundColor = Constants.BaseColor.navigationBar
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let backButtonItem = UIBarButtonItem(title: "검색", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = backButtonItem
         
     }
     
@@ -172,9 +179,11 @@ extension MemoSearchViewController {
     }
     
     @objc func writeButtonClicked() {
-        let vc = MemoWriteController()
         let backButtonItem = UIBarButtonItem(title: "메모", style: .plain, target: self, action: nil)
-        self.navigationController!.navigationItem.backBarButtonItem = backButtonItem
+        self.navigationItem.backBarButtonItem = backButtonItem
+        
+        let vc = MemoWriteController()
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -327,8 +336,7 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             vc.memo = unPinnedMemo![indexPath.row]
         }
-        let backButtonItem = UIBarButtonItem(title: "검색", style: .plain, target: self, action: nil)
-        vc.navigationController!.navigationItem.backBarButtonItem = backButtonItem
+        
 
         self.navigationController?.pushViewController(vc, animated: true)
     }
