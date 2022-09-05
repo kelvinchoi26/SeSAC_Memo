@@ -13,6 +13,10 @@ protocol UserMemoRepositoryType {
     func fetch() -> Results<UserMemo>
     func updatePinned(item: UserMemo)
     func deleteItem(item: UserMemo)
+    func countOfPinnedMemo() -> Int
+    func fetchFilter() -> Results<UserMemo>
+    func fetchDeFilter() -> Results<UserMemo>
+//    func fetchSearched(text: String) -> Results<UserMemo>
 }
 
 // 어떤 메서드가 있는지 보기 편하게 프로토콜로 만들어둠
@@ -50,7 +54,7 @@ class UserMemoRepository: UserMemoRepositoryType {
         return localRealm.objects(UserMemo.self).filter("pinned == false").sorted(byKeyPath: "writtenDate", ascending: true)
     }
     
-    func fetchSearched(text: String) -> Results<UserMemo> {
-        return localRealm.objects(UserMemo.self).filter("diaryTitle CONTAINS '\(text)' or diaryContent CONTAINS '\(text)'").sorted(byKeyPath: "writtenDate", ascending: true)
-    }
+//    func fetchSearched(text: String) -> Results<UserMemo> {
+//        return localRealm.objects(UserMemo.self).filter("memoTitle CONTAINS '\(text)' or memoContent CONTAINS '\(text)'").sorted(byKeyPath: "writtenDate", ascending: true)
+//    }
 }

@@ -19,7 +19,6 @@ class BaseViewController: UIViewController {
 
         configureUI()
         setConstraints()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

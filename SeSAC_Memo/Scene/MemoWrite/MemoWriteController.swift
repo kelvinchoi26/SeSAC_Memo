@@ -14,12 +14,17 @@ import MemoUIFramework
 
 final class MemoWriteController: BaseViewController {
     
+    let repository = UserMemoRepository()
+    
+    var memo: UserMemo?
+    
     let textView = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = Constants.BaseColor.background
+        
     }
     
     override func configureUI() {
@@ -35,6 +40,8 @@ final class MemoWriteController: BaseViewController {
         view.addSubview(textView)
         
         configureNavigationController()
+        
+        isNewMemo()
     }
     
     override func setConstraints() {
@@ -58,7 +65,7 @@ final class MemoWriteController: BaseViewController {
     }
     
     @objc func shareButtonClicked() {
-        let shareContent = memoTextView.text ?? ""
+        let shareContent = textView.text ?? ""
                 
         let vc = UIActivityViewController(activityItems: [shareContent], applicationActivities: [])
         self.present(vc, animated: true, completion: nil)
@@ -66,5 +73,16 @@ final class MemoWriteController: BaseViewController {
     
     @objc func doneButtonClicked() {
         
+    }
+}
+
+extension MemoWriteController {
+    func isNewMemo() {
+        if memo == nil {
+            // 키보드 자동으로 띄워줌
+            textView.becomeFirstResponder()
+        } else {
+            textView.text = memo!.memoTitle + "\n" + (memo!.memoContent ?? "")
+        }
     }
 }

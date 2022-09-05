@@ -65,7 +65,7 @@ final class MemoSearchViewController: BaseViewController {
         super.viewDidLoad()
         
         // Realm 데이터를 정렬해 tasks에 담기
-        tasks = repository.fetch()
+        fetchRealm()
         
 //        checkInitialRun()
         
@@ -81,6 +81,7 @@ final class MemoSearchViewController: BaseViewController {
         fetchRealm()
         tableView.reloadData()
         
+        configureToolbar()
     }
     
     override func configureUI() {
@@ -117,11 +118,15 @@ final class MemoSearchViewController: BaseViewController {
 
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "검색"
+        searchController.searchResultsUpdater = self
         self.navigationItem.searchController = searchController
+        
+        
         self.navigationItem.title = "\(count ?? "0")개의 메모"
         self.navigationItem.titleView?.tintColor = Constants.BaseColor.text
         self.navigationItem.titleView?.backgroundColor = Constants.BaseColor.navigationBar
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
     }
     
 }
@@ -168,8 +173,11 @@ extension MemoSearchViewController {
     
     @objc func writeButtonClicked() {
         let vc = MemoWriteController()
+        let backButtonItem = UIBarButtonItem(title: "메모", style: .plain, target: self, action: nil)
+        self.navigationController!.navigationItem.backBarButtonItem = backButtonItem
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -310,12 +318,30 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UISwipeActionsConfiguration(actions: [delete])
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MemoWriteController()
+        
+        if indexPath.section == 0 {
+            vc.memo = pinnedMemo![indexPath.row]
+        } else {
+            vc.memo = unPinnedMemo![indexPath.row]
+        }
+        let backButtonItem = UIBarButtonItem(title: "검색", style: .plain, target: self, action: nil)
+        vc.navigationController!.navigationItem.backBarButtonItem = backButtonItem
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MemoSearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {return}
-        self.searchedMemo = repository.fetchSearched(text: text)
+        self.searchedMemo = fetchSearched(text: text)
         self.tableView.reloadData()
+    }
+    
+    func fetchSearched(text: String) -> Results<UserMemo> {
+        return self.tasks!.filter("memoTitle CONTAINS '\(text)' or memoContent CONTAINS '\(text)'").sorted(byKeyPath: "writtenDate", ascending: true)
     }
 }
