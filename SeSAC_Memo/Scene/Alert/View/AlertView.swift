@@ -19,7 +19,7 @@ final class AlertView: BaseView {
         super.configureUI()
         
         containerView.do {
-            $0.backgroundColor = Constants.BaseColor.background
+            $0.backgroundColor = Constants.BaseColor.gray
             $0.layer.cornerRadius = 8
         }
         

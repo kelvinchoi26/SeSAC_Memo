@@ -11,6 +11,7 @@ import UIKit
 import Then
 import RealmSwift
 import MemoUIFramework
+import Toast
 
 final class MemoSearchViewController: BaseViewController {
     
@@ -18,7 +19,6 @@ final class MemoSearchViewController: BaseViewController {
     
     var tasks: Results<UserMemo>? {
         didSet {
-            print("current tasks: \(tasks)")
             // 핵심 ***
             // 계속해서 값 갱신 필수!
             pinnedMemo = repository.fetchFilter()
@@ -70,7 +70,6 @@ final class MemoSearchViewController: BaseViewController {
         // Realm 데이터를 정렬해 tasks에 담기
         fetchRealm()
         
-//        checkInitialRun()
         
         print("Realm is located at: ", repository.localRealm.configuration.fileURL!)
         
@@ -78,6 +77,8 @@ final class MemoSearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        checkInitialRun()
         
         configureNavigationController()
         
@@ -187,6 +188,17 @@ extension MemoSearchViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func showPinnedAlert() {
+        let alert = UIAlertController(title: "", message: "고정 메모는 5개까지만 가능합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default) { _ in
+            self.tableView.setEditing(false, animated: true)
+        }
+        
+        alert.addAction(ok)
+        
+        self.present(alert, animated: true)
+    }
+    
 }
 
 extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -292,33 +304,62 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let pinned = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
+        var memo = UserMemo()
+        
+        let action = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            // realm data update
-            self.repository.updatePinned(item: self.tasks![indexPath.row])
+            if indexPath.section == 1 && self.numOfPinnedMemo >= 5 {
+                self.showPinnedAlert()
+            } else {
+                if self.numOfPinnedMemo == 0 {
+                    memo = self.tasks![indexPath.row]
+                } else {
+                    memo = indexPath.section == 1 ? self.unPinnedMemo![indexPath.row] : self.pinnedMemo![indexPath.row]
+                }
+            }
+            
+            self.repository.updatePinned(item: memo)
             self.tasks = self.repository.fetch()
-            
         }
         
-        // realm 데이터 기준
-        let image = tasks![indexPath.row].pinned ? "pin.fill" : "pin.slash.fill"
-        pinned.image = UIImage(systemName: image)
-        pinned.backgroundColor = Constants.BaseColor.button
+        action.image = indexPath.section == 0 ? UIImage(systemName: "pin.slash.fill") : UIImage(systemName: "pin.fill")
         
+        action.backgroundColor = Constants.BaseColor.button
         
-        return UISwipeActionsConfiguration(actions: [pinned])
+        return UISwipeActionsConfiguration(actions: [action])
     }
+        
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-//        let memo = self.tasks[indexPath.row]
-//        ]
+        var memo = UserMemo()
+        
         let delete = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
             
-            // 사진 먼저 지우고 램 지우면 문제가 안생겼던 이유
+            let row = indexPath.row
             
-            self.repository.deleteItem(item: self.tasks![indexPath.row])
-            self.tasks = self.repository.fetch()
+            if self.numOfPinnedMemo == 0 {
+                memo = self.tasks![row]
+            } else {
+                memo = indexPath.section == 1 ? self.unPinnedMemo![row] : self.pinnedMemo![row]
+            }
+            
+            let alert = UIAlertController(title: "", message: "정말 삭제하시겠습니다?", preferredStyle: .alert)
+            
+            let ok = UIAlertAction(title: "확인", style: .destructive) { _ in
+                self.repository.deleteItem(item: memo)
+                self.tasks = self.repository.fetch()
+            }
+            
+            let cancel = UIAlertAction(title: "취소", style: .cancel) { _ in
+                // 테이블 뷰 편집 모드 종료
+                self.tableView.setEditing(false, animated: true)
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            
+            self.present(alert, animated: true)
         }
 
         // realm 데이터 기준

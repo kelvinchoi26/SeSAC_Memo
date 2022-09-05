@@ -7,6 +7,7 @@
 
 import Foundation
 import Then
+import UIKit
 
 final class AlertViewController: BaseViewController {
     
@@ -23,10 +24,10 @@ final class AlertViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         view.isOpaque = false
         
-        alertView.backgroundColor = Constants.BaseColor.background
+        alertView.backgroundColor = Constants.BaseColor.gray
         alertView.layer.cornerRadius = Constants.Design.cornerRadius
     }
     
