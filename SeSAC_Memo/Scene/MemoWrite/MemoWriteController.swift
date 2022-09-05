@@ -77,7 +77,6 @@ final class MemoWriteController: BaseViewController {
     }
     
     @objc func doneButtonClicked() {
-        addFixMemo()
         self.navigationItem.rightBarButtonItems = nil
     }
     

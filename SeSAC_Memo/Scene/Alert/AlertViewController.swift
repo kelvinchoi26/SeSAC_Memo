@@ -29,6 +29,8 @@ final class AlertViewController: BaseViewController {
         
         alertView.backgroundColor = Constants.BaseColor.gray
         alertView.layer.cornerRadius = Constants.Design.cornerRadius
+        alertView.layer.borderWidth = Constants.Design.borderWidth
+        alertView.layer.borderColor = UIColor.white.cgColor
     }
     
     override func setConstraints() {
