@@ -54,6 +54,12 @@ class UserMemoRepository: UserMemoRepositoryType {
         return localRealm.objects(UserMemo.self).filter("pinned == false").sorted(byKeyPath: "writtenDate", ascending: true)
     }
     
+    func addMemo(item: UserMemo) {
+        try! localRealm.write {
+            localRealm.add(item)
+        }
+    }
+    
 //    func fetchSearched(text: String) -> Results<UserMemo> {
 //        return localRealm.objects(UserMemo.self).filter("memoTitle CONTAINS '\(text)' or memoContent CONTAINS '\(text)'").sorted(byKeyPath: "writtenDate", ascending: true)
 //    }

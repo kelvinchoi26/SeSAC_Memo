@@ -373,9 +373,9 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = MemoWriteController()
         
         if indexPath.section == 0 {
-            vc.memo = pinnedMemo![indexPath.row]
+            vc.selectedMemo = pinnedMemo![indexPath.row]
         } else {
-            vc.memo = unPinnedMemo![indexPath.row]
+            vc.selectedMemo = unPinnedMemo![indexPath.row]
         }
         
 
