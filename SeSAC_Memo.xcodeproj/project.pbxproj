@@ -18,12 +18,12 @@
 		1E041D1C28BF9D06008F4BB7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1E041D1B28BF9D06008F4BB7 /* .gitignore */; };
 		1E041D2028BF9F98008F4BB7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D1F28BF9F98008F4BB7 /* BaseViewController.swift */; };
 		1E041D2828BFCE33008F4BB7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D2728BFCE33008F4BB7 /* BaseTableViewCell.swift */; };
-		1E041D3528C12301008F4BB7 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3428C12301008F4BB7 /* AlertViewController.swift */; };
+		1E041D3528C12301008F4BB7 /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3428C12301008F4BB7 /* WalkThroughViewController.swift */; };
 		1E041D3928C126A6008F4BB7 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1E041D3828C126A6008F4BB7 /* Then */; };
 		1E041D3C28C12A7D008F4BB7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3B28C12A7D008F4BB7 /* BaseView.swift */; };
 		1E041D3F28C12AEC008F4BB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D3E28C12AEC008F4BB7 /* Constants.swift */; };
 		1E041D4128C12B10008F4BB7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4028C12B10008F4BB7 /* Color.swift */; };
-		1E041D4328C12DC1008F4BB7 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4228C12DC1008F4BB7 /* AlertView.swift */; };
+		1E041D4328C12DC1008F4BB7 /* WalkThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4228C12DC1008F4BB7 /* WalkThroughView.swift */; };
 		1E041D4528C18691008F4BB7 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4428C18691008F4BB7 /* Text.swift */; };
 		1E041D4728C187EF008F4BB7 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4628C187EF008F4BB7 /* Font.swift */; };
 		1E041D4F28C3B62F008F4BB7 /* MemoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E041D4E28C3B62F008F4BB7 /* MemoSearchViewController.swift */; };
@@ -81,11 +81,11 @@
 		1E041D1B28BF9D06008F4BB7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1E041D1F28BF9F98008F4BB7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1E041D2728BFCE33008F4BB7 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		1E041D3428C12301008F4BB7 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		1E041D3428C12301008F4BB7 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		1E041D3B28C12A7D008F4BB7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		1E041D3E28C12AEC008F4BB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1E041D4028C12B10008F4BB7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		1E041D4228C12DC1008F4BB7 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		1E041D4228C12DC1008F4BB7 /* WalkThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughView.swift; sourceTree = "<group>"; };
 		1E041D4428C18691008F4BB7 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		1E041D4628C187EF008F4BB7 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		1E041D4E28C3B62F008F4BB7 /* MemoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoSearchViewController.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				1E041D5328C3CE2F008F4BB7 /* View */,
-				1E041D3428C12301008F4BB7 /* AlertViewController.swift */,
+				1E041D3428C12301008F4BB7 /* WalkThroughViewController.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 		1E041D5328C3CE2F008F4BB7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E041D4228C12DC1008F4BB7 /* AlertView.swift */,
+				1E041D4228C12DC1008F4BB7 /* WalkThroughView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -373,11 +373,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E041CD828BF3F3A008F4BB7 /* ViewController.swift in Sources */,
-				1E041D3528C12301008F4BB7 /* AlertViewController.swift in Sources */,
+				1E041D3528C12301008F4BB7 /* WalkThroughViewController.swift in Sources */,
 				1E041D4F28C3B62F008F4BB7 /* MemoSearchViewController.swift in Sources */,
 				1E041D2028BF9F98008F4BB7 /* BaseViewController.swift in Sources */,
 				1E041CD428BF3F3A008F4BB7 /* AppDelegate.swift in Sources */,
-				1E041D4328C12DC1008F4BB7 /* AlertView.swift in Sources */,
+				1E041D4328C12DC1008F4BB7 /* WalkThroughView.swift in Sources */,
 				1E041D6E28C54650008F4BB7 /* MemoWriteController.swift in Sources */,
 				1E041D5628C3CE4B008F4BB7 /* MemoSearchTableViewCell.swift in Sources */,
 				1E041D3C28C12A7D008F4BB7 /* BaseView.swift in Sources */,
@@ -538,6 +538,7 @@
 				DEVELOPMENT_TEAM = AFMSUTLF6S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_Memo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "최형민";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -566,6 +567,7 @@
 				DEVELOPMENT_TEAM = AFMSUTLF6S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_Memo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "최형민";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -42,7 +42,7 @@ final class MemoSearchViewController: BaseViewController {
     // 고정된 메모가 5개인 경우 토스트를 사용해서 불가능하다고 알림
     var numOfPinnedMemo: Int = 0
     
-    // searchBar에 입력중인지 여
+    // searchBar에 입력중인지 여부
     var isSearching: Bool {
         let searchController = self.navigationItem.searchController
         let isActive = searchController?.isActive ?? false
@@ -55,8 +55,10 @@ final class MemoSearchViewController: BaseViewController {
     }
     
     lazy var tableView: UITableView = {
-        let view = UITableView()
-        view.rowHeight = 50
+        let view = UITableView(frame: CGRect(), style: .insetGrouped)
+        view.backgroundColor = .clear
+        view.separatorStyle = .singleLine
+        view.separatorInset = UIEdgeInsets()
         view.delegate = self
         view.dataSource = self
         view.register(MemoSearchTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -128,8 +130,8 @@ final class MemoSearchViewController: BaseViewController {
         
         
         self.navigationItem.title = "\(count ?? "0")개의 메모"
-        self.navigationItem.titleView?.tintColor = Constants.BaseColor.text
-        self.navigationItem.titleView?.backgroundColor = Constants.BaseColor.navigationBar
+        self.navigationItem.titleView?.tintColor = Constants.BaseColor.background
+        self.navigationItem.titleView?.backgroundColor = Constants.BaseColor.tableViewGray
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let backButtonItem = UIBarButtonItem(title: "검색", style: .plain, target: self, action: nil)
@@ -142,14 +144,14 @@ final class MemoSearchViewController: BaseViewController {
 extension MemoSearchViewController {
     // 첫 실행인지 확인 후 Alert 띄우기
     func checkInitialRun() {
-        if userDefaults.bool(forKey: "NotFirst") == false {
+        if !userDefaults.bool(forKey: "NotFirst") {
             
             userDefaults.set(true, forKey: "NotFirst")
             
-            let popUpVC = AlertViewController()
-            popUpVC.modalPresentationStyle = .overCurrentContext
+            let popUpVC = WalkThroughViewController()
+            popUpVC.modalPresentationStyle = .overFullScreen
             
-            self.present(popUpVC, animated: true, completion: nil)
+            self.present(popUpVC, animated: true)
         }
     }
     
@@ -165,9 +167,6 @@ extension MemoSearchViewController {
     
         let writeButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(writeButtonClicked))
         writeButton.tintColor = Constants.BaseColor.button
-        writeButton.customView?.backgroundColor = Constants.BaseColor.button
-        
-        self.navigationController?.toolbar.barTintColor = .red
         
         var items = [UIBarButtonItem]()
         
@@ -232,7 +231,7 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        view.backgroundColor = .black
+        view.backgroundColor = Constants.BaseColor.background
 
         let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.frame.width, height: 50))
 
@@ -364,7 +363,7 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
 
         // realm 데이터 기준
         delete.image = UIImage(systemName: "trash.fill")
-        delete.backgroundColor = Constants.BaseColor.trash
+        delete.backgroundColor = Constants.BaseColor.trashCan
         
         return UISwipeActionsConfiguration(actions: [delete])
     }
@@ -380,6 +379,10 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
         
 
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
 }
 

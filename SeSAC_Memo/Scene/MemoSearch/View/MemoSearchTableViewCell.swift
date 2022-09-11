@@ -17,7 +17,7 @@ class MemoSearchTableViewCell: BaseTableViewCell {
     let stackView = UIStackView()
     
     override func configureUI() {
-        self.backgroundColor = Constants.BaseColor.gray
+        self.backgroundColor = Constants.BaseColor.tableViewGray
         self.layer.cornerRadius = 8
         
         titleLabel.do {
@@ -26,7 +26,7 @@ class MemoSearchTableViewCell: BaseTableViewCell {
         }
         
         contentLabel.do {
-            $0.textColor = Constants.BaseColor.memoText
+            $0.textColor = Constants.BaseColor.text
             $0.font = .systemFont(ofSize: 14)
         }
         

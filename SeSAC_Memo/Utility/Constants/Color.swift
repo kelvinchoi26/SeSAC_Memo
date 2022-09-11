@@ -11,16 +11,11 @@ import UIKit
 extension Constants {
     
     enum BaseColor {
-        static let navigationBar = UIColor.darkGray
-        static let background = UIColor.black
-        static let text = UIColor.white
-        static let memoText = UIColor.lightGray
-        static let placeholder = UIColor.lightGray
-        static let trash = UIColor.systemRed
-        static let view = UIColor.darkGray
+        static let trashCan = UIColor(named: "redColor")
+        static let background = UIColor(named: "backgroundColor")
+        static let text = UIColor(named: "textColor")
         static let button = UIColor(named: "buttonColor")
-        static let border = UIColor.white.cgColor
-        static let gray = UIColor(named: "defaultGray")
+        static let tableViewGray = UIColor(named: "tableViewGray")
     }
     
 }
