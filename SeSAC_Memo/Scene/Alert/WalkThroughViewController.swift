@@ -20,7 +20,20 @@ final class WalkThroughViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
+        
+        alertView.confirmButton.addTarget(self, action: #selector(confirmButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func confirmButtonClicked() {
+        userDefaults.set(true, forKey: "NotFirst")
+        self.dismiss(animated: false)
+    }
+    
+    override func configureUI() {
+        view.backgroundColor = Constants.BaseColor.background?.withAlphaComponent(0.4)
+        view.isOpaque = false
     }
     
 }

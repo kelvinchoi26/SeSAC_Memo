@@ -19,13 +19,14 @@ final class WalkThroughView: BaseView {
         
         alertView.do {
             $0.layer.cornerRadius = 20
+            $0.backgroundColor = Constants.BaseColor.tableViewGray
         }
         
         textLabel.do {
             $0.numberOfLines = 0
             $0.text = Constants.Text.alertText
             $0.textColor = Constants.BaseColor.text
-            $0.font = .boldSystemFont(ofSize: 16)
+            $0.font = .boldSystemFont(ofSize: 20)
         }
         
         confirmButton.do {
@@ -43,7 +44,6 @@ final class WalkThroughView: BaseView {
             alertView.addSubview($0)
         }
         
-        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         self.layer.borderWidth = Constants.Design.borderWidth
     }
     
@@ -52,7 +52,7 @@ final class WalkThroughView: BaseView {
         
         alertView.snp.makeConstraints {
             $0.centerX.centerY.equalTo(self)
-            $0.width.equalTo(self.snp.height).multipliedBy(0.7)
+            $0.width.equalToSuperview().multipliedBy(0.65)
             $0.height.equalTo(alertView.snp.width)
         }
         

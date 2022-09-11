@@ -146,10 +146,9 @@ extension MemoSearchViewController {
     func checkInitialRun() {
         if !userDefaults.bool(forKey: "NotFirst") {
             
-            userDefaults.set(true, forKey: "NotFirst")
-            
             let popUpVC = WalkThroughViewController()
             popUpVC.modalPresentationStyle = .overFullScreen
+            view.backgroundColor = Constants.BaseColor.background?.withAlphaComponent(0.4)
             
             self.present(popUpVC, animated: true)
         }
