@@ -32,12 +32,24 @@ final class MemoSearchViewController: BaseViewController {
         }
     }
     
-    var pinnedMemo: Results<UserMemo>?
+    var pinnedMemo: Results<UserMemo>? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
-    var unPinnedMemo: Results<UserMemo>?
+    var unPinnedMemo: Results<UserMemo>? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // 검색된 메모들
-    var searchedMemo: Results<UserMemo>?
+    var searchedMemo: Results<UserMemo>? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // 고정된 메모가 5개인 경우 토스트를 사용해서 불가능하다고 알림
     var numOfPinnedMemo: Int = 0
@@ -234,17 +246,19 @@ extension MemoSearchViewController: UITableViewDelegate, UITableViewDataSource {
 
         let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.frame.width, height: 50))
 
-        if self.isSearching {
-            label.text = "\(self.searchedMemo?.count ?? 0)개 찾음"
+        var title = "메모"
+        
+        if numOfPinnedMemo > 0, section == 0, !isSearching {
+            title = "고정된 메모"
         } else {
-            if numOfPinnedMemo == 0 && tasks!.count == 0 {
-                return nil
-            } else if numOfPinnedMemo == tasks!.count {
-                label.text = "고정된 메모"
-            } else {
-                label.text = section == 0 ? "고정된 메모" : "메모"
+            if isSearching {
+                title = "\(self.searchedMemo?.count ?? 0)개 찾음"
+            } else if tasks!.isEmpty {
+                title = ""
             }
         }
+        
+        label.text = title
 
         label.textColor = Constants.BaseColor.text
         label.font = .boldSystemFont(ofSize: 24)
